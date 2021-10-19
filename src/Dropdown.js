@@ -1,26 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-
-// useState is a function that returns two elements:
-
-// the first element is a snapshopt of the current state
-// meaning its either the inital state or the updated state after the component re-renders.
-
-// second element is a function that allows you to update the current state.
 
 const Dropdown = props => {
 
-  // JS destructuring to get the current state and the function return 
-  const [selectedValue, setSelectedValue] = useState('');
+  const dropdownChanged = e => {
+    props.changed(e.target.value);
+  }    
 
-  return (
-    <div>
-      <select value={selectedValue} onChange={ e => setSelectedValue(e.target.value) }   >
-        {props.options.map( (item, idx) => <option key={idx} value={item.value}> {item.name} </option>  )}
-      </select>
-      <p>{selectedValue}</p>
+return (
+    <div className="col-sm-6 form-group row px-0">     
+        <label className="form-label col-sm-2">{props.label}</label>       
+        <select value={props.selectedValue} onChange={dropdownChanged} className="form-control form-control-sm col-sm-10">
+            <option key={0}>Select...</option>
+            {props.options.map((item, idx) => <option key={idx + 1} value={item.id}>{item.name}</option>)}
+        </select>            
     </div>
-  )
+);
+
 
 }
 
