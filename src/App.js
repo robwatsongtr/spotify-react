@@ -19,6 +19,8 @@ const App = () => {
     {value: 3, name: 'C'}
   ]
 
+  // useState
+  // 
   // useState is a function that returns two elements:
   // -the first element is a snapshopt of the current state
   // meaning its either the inital state or the updated state after the component re-renders.
@@ -30,6 +32,12 @@ const App = () => {
   // state manages selected genres in addition to the array of genres
   const [genres, setGenres] = useState( { selectedGenre: '', listOfGenresFromApi: [] } );  
 
+  // same for playlists 
+  const [playlist, setPlaylist] = useState( {selectedPlaylist: '', listOfPlaylistFromApi: []} )
+
+
+  // useEffect:
+  // 
   // useEffect can fire an event when provided with a dependency
   // array, instead of automatically every render cycle 
   //
@@ -66,6 +74,8 @@ const App = () => {
     
 
   }, [genres.selectedGenre, spotify.ClientId, spotify.ClientSecret])
+
+  
 
   // this function gets passed down to dropdown component 
   const genreChanged = val => {
