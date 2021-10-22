@@ -8,7 +8,7 @@ const Listbox = props => {
   }
 
   return (
-    <div className="col-sm-6 px-0">
+    <div>
       <div className="list-group">
           {
             props.items.map( (item, idx) =>

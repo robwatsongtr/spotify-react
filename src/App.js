@@ -170,12 +170,12 @@ const App = () => {
           />
 
           <div className="col-sm-6 row form-group px-0">
-            <button type='submit' className="btn btn-success col-sm-12">
+            <button type='submit'className="btn btn-success col-sm-12">
             Search
             </button>
           </div>
 
-          <div className="row">
+          <div>
             <Listbox items={tracks.listofTracksFromApi} clicked={ listboxClicked } />
             { trackDetail && <Detail {...trackDetail} /> }
           </div>
