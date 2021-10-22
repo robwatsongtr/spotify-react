@@ -13,11 +13,14 @@ return (
 
         <label className="form-label col-sm-2">{props.label}</label> 
 
-        <select value={props.selectedValue} onChange={dropdownChanged} className="form-control form-control-sm col-sm-10">
-            <option key={0}>Select...</option>
-            {props.options.map(
-              (item, idx) => <option key={idx + 1} value={item.id}>{item.name}</option>
-            )}
+        <select 
+          value={props.selectedValue} 
+          onChange={dropdownChanged} 
+          className="form-control form-control-sm col-sm-10"
+        >
+          { props.options.map( (item, idx) => 
+            <option key={idx + 1} value={item.id}>{item.name}</option>
+          ) }
         </select>      
 
     </div>
@@ -28,3 +31,6 @@ return (
 
 export default Dropdown;
 
+
+
+// <option key={0}>Select...</option>
