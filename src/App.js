@@ -152,25 +152,36 @@ const App = () => {
   // but we're using the spread operator, in turn the properties are extracted
   // which allows destructuring in our component where we can access the property directly.
   return (
-    <form onSubmit={ buttonClicked }>
-      <div className="container">
-        <Dropdown 
-          options={genres.listOfGenresFromApi} 
-          changed={ genreChanged }
-          selectedValue={genres.selectedGenre}   
-        />
-        <Dropdown 
-          options={playlist.listOfPlaylistsFromApi} 
-          changed={ playlistChanged }
-          selectedValue={playlist.selectedPlaylist}
-        />
-        <button type='submit'>
-          Search
-        </button>
-        <Listbox items={tracks.listofTracksFromApi} clicked={ listboxClicked } />
-        { trackDetail && <Detail {...trackDetail} /> }
-      </div>
-    </form>
+    <div className="container">
+      <form onSubmit={ buttonClicked }>
+
+          <Dropdown 
+            label="Genre:"
+            options={genres.listOfGenresFromApi} 
+            changed={ genreChanged }
+            selectedValue={genres.selectedGenre}   
+          />
+
+          <Dropdown 
+            label="Playlist:"
+            options={playlist.listOfPlaylistsFromApi} 
+            changed={ playlistChanged }
+            selectedValue={playlist.selectedPlaylist}
+          />
+
+          <div className="col-sm-6 row form-group px-0">
+            <button type='submit'>
+            Search
+            </button>
+          </div>
+
+          <div className="row">
+            <Listbox items={tracks.listofTracksFromApi} clicked={ listboxClicked } />
+            { trackDetail && <Detail {...trackDetail} /> }
+          </div>
+
+      </form>
+    </div>
   )
 
 }
