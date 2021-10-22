@@ -170,7 +170,7 @@ const App = () => {
           />
 
           <div className="col-sm-6 row form-group px-0">
-            <button type='submit'>
+            <button type='submit' className="btn btn-success col-sm-12">
             Search
             </button>
           </div>
