@@ -18,8 +18,8 @@ label {
 }
 
 img {
-  width:140px;
-  height:140px;
+  width:340px;
+  height:340px;
 }
 
 .btn-success {
@@ -32,4 +32,8 @@ img {
 
 img.track {
   border: 1px solid #8a8a8a;
+}
+
+.title {
+  text-align: center;
 }

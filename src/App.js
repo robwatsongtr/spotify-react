@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Dropdown from './Dropdown';
 import Listbox from './Listbox';
 import Detail from './Detail';
+import Title from './Title';
 import { Credentials } from './Credentials';
 import axios from 'axios';
 
@@ -152,35 +153,38 @@ const App = () => {
   // but we're using the spread operator, in turn the properties are extracted
   // which allows destructuring in our component where we can access the property directly.
   return (
-    <div className="container">
-      <form onSubmit={ buttonClicked }>
+    <div>
+      <Title />
+      <div className="container">
+        <form onSubmit={ buttonClicked }>
 
-          <Dropdown 
-            label="Genre:"
-            options={genres.listOfGenresFromApi} 
-            changed={ genreChanged }
-            selectedValue={genres.selectedGenre}   
-          />
+            <Dropdown 
+              label="Genre:"
+              options={genres.listOfGenresFromApi} 
+              changed={ genreChanged }
+              selectedValue={genres.selectedGenre}   
+            />
 
-          <Dropdown 
-            label="Playlist:"
-            options={playlist.listOfPlaylistsFromApi} 
-            changed={ playlistChanged }
-            selectedValue={playlist.selectedPlaylist}
-          />
+            <Dropdown 
+              label="Playlist:"
+              options={playlist.listOfPlaylistsFromApi} 
+              changed={ playlistChanged }
+              selectedValue={playlist.selectedPlaylist}
+            />
 
-          <div className="col-sm-6 row form-group px-0">
-            <button type='submit'className="btn btn-success col-sm-12">
-            Search
-            </button>
-          </div>
+            <div className="col-sm-6 row form-group px-0">
+              <button type='submit'className="btn btn-success">
+              Search
+              </button>
+            </div>
 
-          <div>
-            <Listbox items={tracks.listofTracksFromApi} clicked={ listboxClicked } />
-            { trackDetail && <Detail {...trackDetail} /> }
-          </div>
+            <div>
+              <Listbox items={tracks.listofTracksFromApi} clicked={ listboxClicked } />
+              { trackDetail && <Detail {...trackDetail} /> }
+            </div>
 
-      </form>
+        </form>
+      </div>
     </div>
   )
 
