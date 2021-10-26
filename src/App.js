@@ -3,7 +3,7 @@ import Dropdown from './Dropdown';
 import Listbox from './Listbox';
 import Detail from './Detail';
 import Title from './Title';
-import WebPlayback from './Webplayer';
+import WebPlayer from './Webplayer';
 import { Credentials } from './Credentials';
 import axios from 'axios';
 
@@ -14,7 +14,7 @@ const App = () => {
 
   // console.log('RENDERING APP.JS');
 
-  
+
   // useState
   // 
   // useState is a function that returns two elements:
@@ -185,7 +185,7 @@ const App = () => {
               { trackDetail && <Detail {...trackDetail} /> }
             </div>
 
-            <WebPlayback token={token} />
+            <WebPlayer token={token} />
 
         </form>
       </div>
