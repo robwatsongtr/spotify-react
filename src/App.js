@@ -3,6 +3,7 @@ import Dropdown from './Dropdown';
 import Listbox from './Listbox';
 import Detail from './Detail';
 import Title from './Title';
+import WebPlayback from './Webplayer';
 import { Credentials } from './Credentials';
 import axios from 'axios';
 
@@ -13,13 +14,7 @@ const App = () => {
 
   // console.log('RENDERING APP.JS');
 
-  // const dummyData = [
-  //   {value: 1, name: 'A'},
-  //   {value: 2, name: 'B'},
-  //   {value: 3, name: 'C'}
-  // ]
-
-
+  
   // useState
   // 
   // useState is a function that returns two elements:
@@ -33,6 +28,8 @@ const App = () => {
   const [playlist, setPlaylist] = useState( {selectedPlaylist: '', listOfPlaylistsFromApi: [] })
   const [tracks, setTracks] = useState( {selectedTrack: '', listofTracksFromApi: [] });
   const [trackDetail, setTrackDetail] = useState(null);
+
+
 
   // useEffect:
   // 
@@ -74,7 +71,7 @@ const App = () => {
 
 
   // these functions below get passed to their respective components
-  // ------------------------------------------------------------------------- 
+  // ------------------------------------------------------------------------------- 
   const genreChanged = val => {
 
     setGenres({
@@ -125,21 +122,23 @@ const App = () => {
   }
 
 
-  // When we click on the listbox item, we get the selected track ID
-  // becuase we set that to be the ID of the actual button.
-
-  // We then use the spread operator on our tracks state variable
-  // to create a new list of tracks. 
-
-  // After which, we use the filter method to find the track containing the
-  // track ID matching that of our button ID.
-
-  // Lastly, we store the trackinfo inside our track detail state variable.
-
   const listboxClicked = val => {
 
+    // When we click on the listbox item, we get the selected track ID
+    // becuase we set that to be the ID of the actual button.
+
+    // We then use the spread operator on our tracks state variable
+    // to create a new list of tracks. 
+
     const currentTracks = [...tracks.listofTracksFromApi];
+
+
+    // After which, we use the filter method to find the track containing the
+    // track ID matching that of our button ID.
+
     const trackInfo = currentTracks.filter( t => t.track.id === val )
+
+    // Lastly, we store the trackinfo inside our track detail state variable.
 
     setTrackDetail(trackInfo[0].track)
 
@@ -152,6 +151,9 @@ const App = () => {
   // we're passing our track object to our track detail component.
   // but we're using the spread operator, in turn the properties are extracted
   // which allows destructuring in our component where we can access the property directly.
+
+  // The JSX:---------------------------------------------------------------------
+
   return (
     <div>
       <Title />
@@ -182,6 +184,8 @@ const App = () => {
               <Listbox items={tracks.listofTracksFromApi} clicked={ listboxClicked } />
               { trackDetail && <Detail {...trackDetail} /> }
             </div>
+
+            <WebPlayback token={token} />
 
         </form>
       </div>
