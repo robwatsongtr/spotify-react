@@ -3,7 +3,7 @@ import Dropdown from './Dropdown';
 import Listbox from './Listbox';
 import Detail from './Detail';
 import Title from './Title';
-import WebPlayer from './Webplayer';
+import Webplayer from './Webplayer';
 import { Credentials } from './Credentials';
 import axios from 'axios';
 
@@ -156,7 +156,9 @@ const App = () => {
 
   return (
     <div>
+      <Webplayer token={token} />
       <Title />
+
       <div className="container">
         <form onSubmit={ buttonClicked }>
 
@@ -185,10 +187,12 @@ const App = () => {
               { trackDetail && <Detail {...trackDetail} /> }
             </div>
 
-            <WebPlayer token={token} />
+            
 
         </form>
       </div>
+
+      
     </div>
   )
 
