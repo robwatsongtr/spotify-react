@@ -1,3 +1,7 @@
+// Back-end for a full 'Authorzation Code Flow' to the Spotify API, which is
+// good for long running apps, such as web apps, where the user grants permissions
+// only once. 
+
 const express = require('express')
 const dotenv = require('dotenv');
 const request = require('request');
