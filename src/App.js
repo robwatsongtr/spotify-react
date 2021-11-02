@@ -11,16 +11,17 @@ const App = (props) => {
 
   const token = props.token; 
 
-  // const spotify = Credentials()
-
   // useState
   // 
   // useState is a function that returns two elements:
+  //
   // -the first element is a snapshopt of the current state
   // meaning its either the inital state or the updated state after the component re-renders.
+  //
   // -second element is a function that allows you to update the current state.
-  // setToken and setGenres and setWhatever are functions that actually
-  // update the state 
+  //
+  // setToken and setGenres and setWhatever actually update the state
+  // 
   const [genres, setGenres] = useState( {selectedGenre: '', listOfGenresFromApi: [] });  
   const [playlist, setPlaylist] = useState( {selectedPlaylist: '', listOfPlaylistsFromApi: [] })
   const [tracks, setTracks] = useState( {selectedTrack: '', listofTracksFromApi: [] });
@@ -29,11 +30,10 @@ const App = (props) => {
 
   // useEffect:
   // 
-  // useEffect can fire an event when provided with a dependency
-  // array, instead of automatically every render cycle 
-  //
-  // On render, the app sends an api call and gets a token.
-  // Then, the app sends an api call to get a list of genres that 
+  // useEffect can fire an event when provided with a dependency array, instead of 
+  // automatically every render cycle 
+  // 
+  // On render the app sends an api call to get a list of genres that 
   // will populate the drop-dowwn. 
   useEffect( () => {
 
@@ -49,7 +49,6 @@ const App = (props) => {
     });
       
   }, [token, genres.selectedGenre])
-
 
 
   // these functions below get passed to their respective components
