@@ -3,17 +3,15 @@ import Dropdown from './Dropdown';
 import Listbox from './Listbox';
 import Detail from './Detail';
 import Title from './Title';
-import Webplayer from './Webplayer';
-import { Credentials } from './Credentials';
+// import Webplayer from './Webplayer';
 import axios from 'axios';
 
 
-const App = () => {
+const App = (props) => {
 
-  const spotify = Credentials()
+  const token = props.token; 
 
-  // console.log('RENDERING APP.JS');
-
+  // const spotify = Credentials()
 
   // useState
   // 
@@ -23,12 +21,10 @@ const App = () => {
   // -second element is a function that allows you to update the current state.
   // setToken and setGenres and setWhatever are functions that actually
   // update the state 
-  const [token, setToken] = useState('');
   const [genres, setGenres] = useState( {selectedGenre: '', listOfGenresFromApi: [] });  
   const [playlist, setPlaylist] = useState( {selectedPlaylist: '', listOfPlaylistsFromApi: [] })
   const [tracks, setTracks] = useState( {selectedTrack: '', listofTracksFromApi: [] });
   const [trackDetail, setTrackDetail] = useState(null);
-
 
 
   // useEffect:
@@ -41,32 +37,18 @@ const App = () => {
   // will populate the drop-dowwn. 
   useEffect( () => {
 
-    axios('https://accounts.spotify.com/api/token', {
-      headers: {
-        'Content-Type' : 'application/x-www-form-urlencoded',
-        'Authorization' : 'Basic ' + btoa(spotify.ClientId + ':' + spotify.ClientSecret)      
-      },
-      data: 'grant_type=client_credentials',
-      method: 'POST'
+    axios('https://api.spotify.com/v1/browse/categories', {
+      method: 'GET',
+      headers: { 'Authorization' : 'Bearer ' + token}
     })
-    .then(tokenResponse => {
-      console.log(tokenResponse.data.access_token);      
-      setToken(tokenResponse.data.access_token);
-
-      axios('https://api.spotify.com/v1/browse/categories', {
-        method: 'GET',
-        headers: { 'Authorization' : 'Bearer ' + tokenResponse.data.access_token}
-      })
-      .then(genreResponse => {
-        setGenres({
-          selectedGenre: genres.selectedGenre,
-          listOfGenresFromApi: genreResponse.data.categories.items
-        }) 
-      });
-      
+    .then(genreResponse => {
+      setGenres({
+        selectedGenre: genres.selectedGenre,
+        listOfGenresFromApi: genreResponse.data.categories.items
+      }) 
     });
-
-  }, [genres.selectedGenre, spotify.ClientId, spotify.ClientSecret])
+      
+  }, [token, genres.selectedGenre])
 
 
 
@@ -156,7 +138,7 @@ const App = () => {
 
   return (
     <div>
-      <Webplayer token={token} />
+      
       <Title />
 
       <div className="container">
@@ -186,13 +168,11 @@ const App = () => {
               <Listbox items={tracks.listofTracksFromApi} clicked={ listboxClicked } />
               { trackDetail && <Detail {...trackDetail} /> }
             </div>
-
-            
+ 
 
         </form>
       </div>
 
-      
     </div>
   )
 
