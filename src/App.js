@@ -3,13 +3,13 @@ import Dropdown from './Dropdown';
 import Listbox from './Listbox';
 import Detail from './Detail';
 import Title from './Title';
-// import Webplayer from './Webplayer';
+import SpotifyPlayer from 'react-spotify-web-playback';
 import axios from 'axios';
 
 
 const App = (props) => {
 
-  const token = props.token; 
+  const currentToken = props.token; 
 
   // useState
   // 
@@ -38,7 +38,7 @@ const App = (props) => {
 
     axios('https://api.spotify.com/v1/browse/categories', {
       method: 'GET',
-      headers: { 'Authorization' : 'Bearer ' + token}
+      headers: { 'Authorization' : 'Bearer ' + currentToken}
     })
     .then(genreResponse => {
       setGenres({
@@ -47,7 +47,7 @@ const App = (props) => {
       }) 
     });
 
-  }, [token, genres.selectedGenre])
+  }, [currentToken, genres.selectedGenre])
 
 
   // these functions below get passed to their respective components
@@ -61,7 +61,7 @@ const App = (props) => {
 
     axios(`https://api.spotify.com/v1/browse/categories/${val}/playlists?limit=10`, {
       method: 'GET',
-      headers: { 'Authorization' : 'Bearer ' + token}
+      headers: { 'Authorization' : 'Bearer ' + currentToken}
     })
     .then( playlistResponse => {
       setPlaylist({
@@ -89,7 +89,7 @@ const App = (props) => {
     axios(`https://api.spotify.com/v1/playlists/${playlist.selectedPlaylist}/tracks?limit=10`,{
       method: 'GET',
       headers: {
-        'Authorization' : 'Bearer ' + token
+        'Authorization' : 'Bearer ' + currentToken
       }
     })
     .then(tracksResponse => {
@@ -128,7 +128,7 @@ const App = (props) => {
   
   // // console.log(`A ${trackDetail} uri ${trackDetail.uri}`)
 
-  // console.log(trackDetail);
+  console.log(trackDetail);
 
   return (
     <div>
@@ -144,20 +144,17 @@ const App = (props) => {
               changed={ genreChanged }
               selectedValue={genres.selectedGenre}   
             />
-
             <Dropdown 
               label="Playlist:"
               options={playlist.listOfPlaylistsFromApi} 
               changed={ playlistChanged }
               selectedValue={playlist.selectedPlaylist}
             />
-
             <div className="col-sm-6 row form-group px-0">
               <button type='submit'className="btn btn-success">
               Search
               </button>
             </div>
-
             <div>
               <Listbox 
                 items={tracks.listofTracksFromApi} 
@@ -165,9 +162,12 @@ const App = (props) => {
               />
               { trackDetail && <Detail {...trackDetail} /> }
             </div>
- 
+            
         </form>
-        
+        <SpotifyPlayer 
+              token={currentToken}
+              uris={trackDetail.uri}             
+            />
       </div>
 
     </div>
