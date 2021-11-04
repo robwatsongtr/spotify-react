@@ -20,8 +20,7 @@ const App = (props) => {
   //
   // -second element is a function that allows you to update the current state.
   //
-  // setToken and setGenres and setWhatever actually update the state
-  // 
+  // setToken and setGenres and setWhatever actually update the state 
   const [genres, setGenres] = useState( {selectedGenre: '', listOfGenresFromApi: [] });  
   const [playlist, setPlaylist] = useState( {selectedPlaylist: '', listOfPlaylistsFromApi: [] })
   const [tracks, setTracks] = useState( {selectedTrack: '', listofTracksFromApi: [] });
@@ -47,7 +46,7 @@ const App = (props) => {
         listOfGenresFromApi: genreResponse.data.categories.items
       }) 
     });
-      
+
   }, [token, genres.selectedGenre])
 
 
@@ -102,38 +101,34 @@ const App = (props) => {
 
   }
 
-
   const listboxClicked = val => {
 
     // When we click on the listbox item, we get the selected track ID
     // becuase we set that to be the ID of the actual button.
-
     // We then use the spread operator on our tracks state variable
     // to create a new list of tracks. 
-
     const currentTracks = [...tracks.listofTracksFromApi];
-
 
     // After which, we use the filter method to find the track containing the
     // track ID matching that of our button ID.
-
     const trackInfo = currentTracks.filter( t => t.track.id === val )
 
     // Lastly, we store the trackinfo inside our track detail state variable.
-
-    setTrackDetail(trackInfo[0].track)
+    let newTrackDetail = trackInfo[0].track;
+    setTrackDetail(newTrackDetail)
 
   }
 
   // the selected state of the dropdown is set by passing an app component method
   // down to the dropdown component as a prop. "Lifting state up". The selected 
   // value is also passed as a prop. 
-
   // we're passing our track object to our track detail component.
   // but we're using the spread operator, in turn the properties are extracted
   // which allows destructuring in our component where we can access the property directly.
+  
+  // // console.log(`A ${trackDetail} uri ${trackDetail.uri}`)
 
-  // The JSX:---------------------------------------------------------------------
+  // console.log(trackDetail);
 
   return (
     <div>
@@ -164,12 +159,15 @@ const App = (props) => {
             </div>
 
             <div>
-              <Listbox items={tracks.listofTracksFromApi} clicked={ listboxClicked } />
+              <Listbox 
+                items={tracks.listofTracksFromApi} 
+                clicked={ listboxClicked } 
+              />
               { trackDetail && <Detail {...trackDetail} /> }
             </div>
  
-
         </form>
+        
       </div>
 
     </div>
