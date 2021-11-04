@@ -125,6 +125,9 @@ const App = (props) => {
   // we're passing our track object to our track detail component.
   // but we're using the spread operator, in turn the properties are extracted
   // which allows destructuring in our component where we can access the property directly.
+
+
+
   return (
     <div>
       
@@ -159,11 +162,8 @@ const App = (props) => {
             </div> 
         </form>
 
-        <SpotifyPlayer 
-          token={currentToken}
-          uris={trackDetail.uri}             
-        />
-
+        { trackDetail && <SpotifyPlayer token={currentToken} uris={ trackDetail.uri } /> } 
+         
       </div>
 
     </div>
