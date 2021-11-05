@@ -114,8 +114,7 @@ const App = (props) => {
     const trackInfo = currentTracks.filter( t => t.track.id === val )
 
     // Lastly, we store the trackinfo inside our track detail state variable.
-    let newTrackDetail = trackInfo[0].track;
-    setTrackDetail(newTrackDetail)
+    setTrackDetail(trackInfo[0].track)
 
   }
 
@@ -163,7 +162,7 @@ const App = (props) => {
         </form>
 
         { trackDetail && <SpotifyPlayer token={currentToken} uris={ trackDetail.uri } /> } 
-         
+
       </div>
 
     </div>

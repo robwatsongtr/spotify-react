@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import App from './App'
+// import WebPlayback from './WebPlayback';
 import Login from './Login'
 
 function GetToken() {
@@ -8,6 +9,7 @@ function GetToken() {
 
   useEffect(() => {
 
+    // 
     async function getToken() {
       const response = await fetch('/auth/token');
       const json = await response.json();
