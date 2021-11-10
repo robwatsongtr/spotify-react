@@ -1,3 +1,7 @@
+
+
+
+
 import React, { useState, useEffect } from 'react';
 
 const track = {
@@ -63,7 +67,7 @@ function WebPlayback(props) {
             player.connect();
 
         };
-    }, []);
+    }, [props.token]);
 
     if (!is_active) { 
         return (
